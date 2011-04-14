@@ -8,18 +8,19 @@
 Summary:	Device::USB::PCSensor::HidTEMPer - Device overview
 Name:		perl-Device-USB-PCSensor-HidTEMPer
 Version:	0.03
-Release:	1
+Release:	2
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-authors/id/M/MS/MSULLAND/Device-USB-PCSensor-HidTEMPer-%{version}.tar.gz
 # Source0-md5:	fbb21e800581be5aab4b8893bcde3393
+Patch0:		perl5.8.patch
 URL:		http://search.cpan.org/dist/Device-USB-PCSensor-HidTEMPer/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
 %if %{with tests}
-BuildRequires:	perl-Device-USB >= 0.31
 BuildRequires:	perl(Device::USB::Device) >= 0.29
+BuildRequires:	perl-Device-USB >= 0.31
 %endif
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -31,6 +32,7 @@ objects to initialize and the dependency on Device::USB.
 
 %prep
 %setup -q -n %{pdir}-%{pnam}-%{version}
+%patch0 -p1
 
 %build
 %{__perl} Makefile.PL \
