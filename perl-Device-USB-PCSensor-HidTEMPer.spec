@@ -17,6 +17,8 @@ License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
 Source0:	http://www.cpan.org/modules/by-authors/id/M/MS/MSULLAND/Device-USB-PCSensor-HidTEMPer-%{pver}.tar.gz
 # Source0-md5:	25b2f5dbb041282a7f17a66f1cd65054
+# https://wwwx.cs.unc.edu/~hays/dev/bash/temper/temper_mon.pl
+Source1:	temper_mon.pl
 URL:		http://search.cpan.org/dist/Device-USB-PCSensor-HidTEMPer/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -44,6 +46,9 @@ objects to initialize and the dependency on Device::USB.
 
 %install
 rm -rf $RPM_BUILD_ROOT
+rm -rf
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -p %{SOURCE1}  $RPM_BUILD_ROOT%{_bindir}/temper_mon
 %{__make} pure_install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -53,6 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc Changes README
+%attr(755,root,root) %{_bindir}/temper_mon
 %dir %{perl_vendorlib}/Device/USB
 %dir %{perl_vendorlib}/Device/USB/PCSensor
 %{perl_vendorlib}/Device/USB/PCSensor/*.pm
