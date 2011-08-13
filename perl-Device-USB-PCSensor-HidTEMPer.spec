@@ -2,19 +2,21 @@
 # Conditional build:
 %bcond_without	tests		# do not perform "make test"
 
+%define		perl_version_stringify() %(perl -Mversion -le 'print version->parse(%1)->stringify' 2>/dev/null || ERROR)
+
 %define		pdir	Device
+%define		pver	%{perl_version_stringify %{version}}
 %define		pnam	USB-PCSensor-HidTEMPer
 %include	/usr/lib/rpm/macros.perl
 Summary:	Device::USB::PCSensor::HidTEMPer - Device overview
 Name:		perl-Device-USB-PCSensor-HidTEMPer
-Version:	0.03
-Release:	2
+Version:	0.03_02
+Release:	1
 # same as perl
 License:	GPL v1+ or Artistic
 Group:		Development/Languages/Perl
-Source0:	http://www.cpan.org/modules/by-authors/id/M/MS/MSULLAND/Device-USB-PCSensor-HidTEMPer-%{version}.tar.gz
-# Source0-md5:	fbb21e800581be5aab4b8893bcde3393
-Patch0:		perl5.8.patch
+Source0:	http://www.cpan.org/modules/by-authors/id/M/MS/MSULLAND/Device-USB-PCSensor-HidTEMPer-%{pver}.tar.gz
+# Source0-md5:	25b2f5dbb041282a7f17a66f1cd65054
 URL:		http://search.cpan.org/dist/Device-USB-PCSensor-HidTEMPer/
 BuildRequires:	perl-devel >= 1:5.8.0
 BuildRequires:	rpm-perlprov >= 4.1-13
@@ -31,8 +33,7 @@ created by PCSensor. It hides any problems recognizing the correct
 objects to initialize and the dependency on Device::USB.
 
 %prep
-%setup -q -n %{pdir}-%{pnam}-%{version}
-%patch0 -p1
+%setup -q -n %{pdir}-%{pnam}-%{pver}
 
 %build
 %{__perl} Makefile.PL \
