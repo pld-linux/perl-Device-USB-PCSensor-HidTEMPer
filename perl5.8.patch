@@ -1,0 +1,23 @@
+--- Device-USB-PCSensor-HidTEMPer-0.03/lib/Device/USB/PCSensor/HidTEMPer/Sensor.pm~	2011-01-30 16:52:28.000000000 +0200
++++ Device-USB-PCSensor-HidTEMPer-0.03/lib/Device/USB/PCSensor/HidTEMPer/Sensor.pm	2011-04-14 09:07:08.806385834 +0300
+@@ -90,7 +90,8 @@
+ sub fahrenheit
+ {
+     my $self    = shift;
+-    my $celsius = $self->celsius() // 0;
++    my $celsius = $self->celsius();
++    $celsius = 0 unless defined $celsius;
+     
+     # Calculate and return the newly created degrees
+     return ( ( $celsius * 9 ) / 5 ) + 32;
+--- Device-USB-PCSensor-HidTEMPer-0.03/lib/Device/USB/PCSensor/HidTEMPer.pm~	2011-01-30 16:52:28.000000000 +0200
++++ Device-USB-PCSensor-HidTEMPer-0.03/lib/Device/USB/PCSensor/HidTEMPer.pm	2011-04-14 09:34:57.959524597 +0300
+@@ -160,7 +160,7 @@
+ sub _init_device
+ {
+     my $prototype   = Device::USB::PCSensor::HidTEMPer::Device->new( $_[0] );
+-    my $parameters  = (SUPPORTED_DEVICES)[0]{$prototype->identifier()};
++    my $parameters  = SUPPORTED_DEVICES->{$prototype->identifier()};
+     
+     return undef unless defined $parameters;
+     
