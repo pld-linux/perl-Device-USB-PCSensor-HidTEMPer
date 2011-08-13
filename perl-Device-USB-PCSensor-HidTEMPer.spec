@@ -46,7 +46,6 @@ objects to initialize and the dependency on Device::USB.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-rm -rf
 install -d $RPM_BUILD_ROOT%{_bindir}
 install -p %{SOURCE1}  $RPM_BUILD_ROOT%{_bindir}/temper_mon
 %{__make} pure_install \
