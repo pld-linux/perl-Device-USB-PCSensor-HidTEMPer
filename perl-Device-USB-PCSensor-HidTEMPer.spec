@@ -6,6 +6,7 @@
 
 %define		pdir	Device
 %define		pver	%{perl_version_stringify %{version}}
+%define		pver	0.0302
 %define		pnam	USB-PCSensor-HidTEMPer
 %include	/usr/lib/rpm/macros.perl
 Summary:	Device::USB::PCSensor::HidTEMPer - Device overview
